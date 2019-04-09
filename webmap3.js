@@ -14,7 +14,7 @@ jQuery.getJSON(stateDemographicsUrl, function (data) {
   let stateStyle = function (feature) {
     let population = feature.properties.POPULATION // get the current state's population attribute
     let stateColor = '#00B9F7' // let the initial color be a darker blue
-    if (population < 6458430.32) { stateColor = '#001DF7' } // if the state's population is less than the average, color it a lighter green
+    if (population > 6458430.32) { stateColor = '#001DF7' } // if the state's population is greater than the average, color it a lighter blue
     return {
       color: stateColor, // use the color variable above for the value
       weight: 1,
@@ -24,7 +24,8 @@ jQuery.getJSON(stateDemographicsUrl, function (data) {
   let onEachFeature = function (feature, layer) {
     let name = feature.properties.STATE_NAME
     let population = feature.properties.POPULATION
-    layer.bindPopup('Population of ' + name + ': ' + population + '<br>Total National Population: 322,921,516')
+    layer.bindPopup('Population of ' + name + ': ' + population + '<br>Total National Population: 322921516'
+                   + '<br>Average State Population: 6458430')
     statesLayer.addLayer(layer)
   }
   let geojsonOptions = {
